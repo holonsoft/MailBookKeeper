@@ -13,6 +13,6 @@ At the moment World of Warcraft Version 8.3 is supported. Because I do'nt like t
 Extra notes:
 A small project to get familar with LUA (with a smell of WoW)
 
-Original addon was "Mail Outbox" from DieenDieen (licensed as PUBLIC DOMAIN), but after 6 years of no-development it was time to create something new on top. And remove LUA errors and ...
+Original addon was "Mail Outbox" from DieenDieen (licensed as PUBLIC DOMAIN), but after 6 years of no-development it was time to create something new on top. And remove LUA errors and so on.
 
 Have fun with this addon
