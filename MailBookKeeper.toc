@@ -2,7 +2,7 @@
 ## X-Compatible-With: 80300
 ## X-Min-Interface: 80300
 ## Title: Mail Bookkeeper
-## Version: 1.0.1.release
+## Version: 1.0.2.release
 ## Notes: Tracks incoming and outgoing mails, trades 
 ## Author: polarkreis@web.de
 ## SavedVariables: MailBookKeeperHistory, MailBookKeeperOptions
