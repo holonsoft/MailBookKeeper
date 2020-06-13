@@ -192,6 +192,8 @@ local regEvents = {
 function core:OnInitialize()
     --print "---MailBookKeeper init";
     self:RegisterChatCommand("MailBookKeeper", "MySlashProcessorFunc");
+	self:RegisterChatCommand("mbk", "MySlashProcessorFunc");
+	
     local config=LibStub("AceConfig-3.0");
   	local dialog = LibStub("AceConfigDialog-3.0");
 	config:RegisterOptionsTable(packedtitle, moconfig);

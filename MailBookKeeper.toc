@@ -2,20 +2,17 @@
 ## X-Compatible-With: 80300
 ## X-Min-Interface: 80300
 ## Title: Mail BookKeeper
-## Version: 1.0.2.release
+## Version: 1.1.0.release
 ## Notes: Tracks incoming and outgoing mails, trades 
 ## Author: polarkreis@web.de
 ## SavedVariables: MailBookKeeperHistory, MailBookKeeperOptions
 ## SavedVariablesPerCharacter: MailBookKeeperHistoryPerChar
 ## OptionalDeps: LibStub, Ace3, lib-st
 ## X-fork: fork of original addon 'Mail Outbox', thanks for great work  to DieenDieen
-## X-Curse-Packaged-Version: 1.0.2.release
+## X-Curse-Packaged-Version: 1.1.0.release
 ## X-Curse-Project-Name: Mail BookKeeper
 ## X-Curse-Project-ID: mbk
 
-README.md
-LICENSE
 
-locales.xml
 embeds.xml
 core.lua
