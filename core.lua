@@ -50,7 +50,7 @@ if ldb then
 	dataobj=ldb:NewDataObject("MailBookKeeper", {
 	icon = "Interface\\AddOns\\MailBookKeeper\\Icon\\MailBookKeeper",
 	iconWidth = 32,
-	label = "Incredible Incoming Mail",
+	label = "Mail Bookkeeper",
 	text = "--",
 	type     = "launcher"
 	});
@@ -1134,8 +1134,8 @@ end
 function core:MySlashProcessorFunc(input)	--
 ----------------------------------------------
     if input=="" then
-      print ("--- Incredible Incoming Mail Handler "..version.." is running");
-      print ("to check mail history use /MailBookKeeper history");
+      print ("--- Mail Bookkeeper "..version.." is running");
+      print ("to check mail history use /MailBookKeeper history  (or mbk /history)");
       print ("for csv export use /MailBookKeeper exportcsv");
    end;
    if strlower(input)=="history" then
