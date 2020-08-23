@@ -20,7 +20,7 @@ local outgoingmailmoney = 0;
 local outgoingmailCOD = 0;
 MailBookKeeperHistory = {};
 local MailBookKeeperHistoryAvaiable = false;
-local	icon = "Interface\\AddOns\\IncToMail\\Icon\\MailBookKeeper";
+local	icon = "Interface\\AddOns\\MailBookKeeper\\Icon\\MailBookKeeper";
 
 local CurrentHistoryVersion=4;
 
