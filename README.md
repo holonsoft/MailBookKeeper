@@ -20,7 +20,7 @@ Have fun with this addon
 
 Further plans:
 
-Search/filter 
+Search and/or filter 
 - date
 - sender
 - receipient
