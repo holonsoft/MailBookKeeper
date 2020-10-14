@@ -653,7 +653,7 @@ function get_currencylist ()
    local currencyname, currencyamount, texturePath, earnedThisWeek, weeklyMax, totalMax, isDiscovered,currencyID;
    currencylist={};
    for currencyID=1,2500  do
-      currencyname, currencyamount, texturePath, earnedThisWeek, weeklyMax, totalMax, isDiscovered = GetCurrencyInfo(currencyID);
+      currencyname, currencyamount, texturePath, earnedThisWeek, weeklyMax, totalMax, isDiscovered = C_CurrencyInfo.GetCurrencyInfo(currencyID);
       if currencyamount~=0 or isDiscovered or #string.trim(currencyname)>0 then
             currencylist [currencyID]={};
             currencylist [currencyID].name=currencyname;
@@ -946,7 +946,7 @@ function get_currencies_status ()
    local currencyname, currencyamount, texturePath, earnedThisWeek, weeklyMax, totalMax, isDiscovered,currencyID, currencyDetails;
    local currencies={};   
    for currencyID,currencyDetails  in pairs (get_currencylist()) do
-      currencyname, currencyamount, texturePath, earnedThisWeek, weeklyMax, totalMax, isDiscovered = GetCurrencyInfo(currencyID);
+      currencyname, currencyamount, texturePath, earnedThisWeek, weeklyMax, totalMax, isDiscovered = C_CurrencyInfo.GetCurrencyInfo(currencyID);
       currencies[currencyID] = currencyamount;
       end;
    return currencies;
