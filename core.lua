@@ -365,7 +365,7 @@ function CheckMailRecipient (...)
    local EditBox = ...;
    local hist= MailBookKeeperHistory;
    local  foundcnt,rcpt=0,EditBox:GetText();
-   if IsIgnored(rcpt) then 
+   if  C_FriendList.IsIgnored(rcpt) then 
       EditBox:SetTextColor(1, 0.4, 0.4);
       else
    for index,sentmail in pairs(hist) do
@@ -658,7 +658,7 @@ function get_currencylist ()
             currencylist [currencyID]={};
             currencylist [currencyID].name=currencyname;
             currencylist [currencyID].texturePath=texturePath;
-            currencylist [currencyID].link=GetCurrencyLink(currencyID, 0);                        
+            currencylist [currencyID].link=C_CurrencyInfo.GetCurrencyLink(currencyID, 0);                        
          end;          
       end;
    return currencylist;
