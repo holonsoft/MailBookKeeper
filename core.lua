@@ -20,7 +20,7 @@ local outgoingmailmoney = 0;
 local outgoingmailCOD = 0;
 MailBookKeeperHistory = {};
 local MailBookKeeperHistoryAvaiable = false;
-local	icon = "Interface\\AddOns\\MailBookKeeper\\Icon\\MailBookKeeper";
+local	icon = "Icon\\MailBookKeeper";
 
 local CurrentHistoryVersion=4;
 
@@ -48,7 +48,7 @@ local ldb=LibStub("LibDataBroker-1.1",true)
 local dataobj = {};
 if ldb then 
 	dataobj=ldb:NewDataObject("MailBookKeeper", {
-	icon = "Interface\\AddOns\\MailBookKeeper\\Icon\\MailBookKeeper",
+	icon = "Icon\\MailBookKeeper",
 	iconWidth = 32,
 	label = "Mail Bookkeeper",
 	text = "--",
@@ -194,6 +194,7 @@ function core:OnInitialize()
     self:RegisterChatCommand("MailBookKeeper", "MySlashProcessorFunc");
 	self:RegisterChatCommand("mbk", "MySlashProcessorFunc");
 	
+	
     local config=LibStub("AceConfig-3.0");
   	local dialog = LibStub("AceConfigDialog-3.0");
 	config:RegisterOptionsTable(packedtitle, moconfig);
@@ -270,6 +271,7 @@ function core:ADDON_LOADED(event, ...)
 			 if sentmail.Version == 1 then  sentmail.Version = 2; sentmail.Channel = "mail"; end;
 			 if sentmail.Version == 2 then  sentmail.Version = 3; sentmail.InOut = "out"; end;
 			 if sentmail.Version == 3 then  sentmail.Version = 4; sentmail.Location = "unknown"; end;
+			 
 			 if sentmail.From==nil then sentmail.From="";end;
 			 if sentmail.Subject==nil then sentmail.Subject="";end;
 			 if sentmail.Channel == nil then sentmail.Channel ="";end; 
@@ -398,6 +400,7 @@ end;
 local function ShowHistory()
 -- Create a container frame
 local f = AceGUI:Create("Frame")
+
 f:SetCallback("OnClose",function(widget)
 local f=widget.ScrollTable.frame;
 f:Hide();
@@ -407,10 +410,16 @@ f:ClearAllPoints();
 widget.ScrollTable = nil;
 AceGUI:Release(widget) 
 end)
+
+
+
+
 f:SetTitle("MailBookKeeper history page");
 f:SetStatusText("List of sent and/or received mails and items")
 f:SetLayout("Fill")
---f.frame:SetResizable(false);
+--f.frame:SetResizable(false);	
+
+
 
 local mailhistorycols = {
 	{ name= "Date/time", width = 140, defaultsort = "dsc", },
@@ -434,7 +443,8 @@ local mailhistorycols = {
 				end				
 		  	end},
 	{ name= "#items", width = 40, defaultsort = "dsc",},
-	{ name= "list", width = 200, defaultsort = "dsc",},
+	{ name= "List", width = 200, defaultsort = "dsc",},
+	{ name= "Body", width = 200, defaultsort = "dsc",},
 	};
 	
   	
@@ -444,6 +454,15 @@ local mailhistorycols = {
 		mailhistoryST.frame:SetPoint("BOTTOMLEFT",window, 10,10)
 		mailhistoryST.frame:SetPoint("TOP", window, 0, -60)
 		mailhistoryST.frame:SetPoint("RIGHT", window, -10,0)	
+
+
+	-- mailhistoryST.frame:RegisterEvent("OnEnter", 
+		-- function (rowframe, cellframe, data, cols, row, realrow, column, scrollingtable, ...)
+			-- local celldata = data[realrow].cols[column];
+	-- --gametooltip:show(celldata);
+		-- end
+	-- );
+
 
 	f.ScrollTable=mailhistoryST;
 	mailhistoryST.Fire=function(...)return true;end;
@@ -465,7 +484,10 @@ local mailhistorycols = {
 		  	{value = sentmail.Subject},
 		  	{value = sentmail.Money},
 		  	{value = sentmail.COD},
-		  	{value = #sentmail.Items},{value = Itemlist}}});
+		  	{value = #sentmail.Items},
+			{value = Itemlist},
+			{value = sentmail.Body}
+			}});
 		  end
      end;
 
