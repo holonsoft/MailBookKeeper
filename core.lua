@@ -491,6 +491,20 @@ local mailhistorycols = {
 		  end
      end;
 
+	-- cvt
+	  tinsert(testdata, {cols = {
+		{value = ""},
+		{value = ""},
+		{value = ""},
+		{value = ""},
+		{value = ""},
+		{value = ""},
+		{value = ""},
+		{value = ""},
+		{value = ""},
+		{value = ""}
+		}});
+
 	   mailhistoryST:SetData(testdata);
 
 local STFilter=function (self, row)
