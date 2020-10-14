@@ -387,6 +387,10 @@ end
 function MyGetInboxText(...)
 	local index = ...;
 	--print ("---Processing mail at index ",index);
+	
+	-- cvt
+	if mooptions.History == nil then mooptions.History = modefaultoptions.History; end;
+	
 	if mooptions.History.Enabled and type(index)=="number" and index >= 1 and index <=  GetInboxNumItems() then
 		local _, _, _, _, _, _, _, _, wasRead, _, _, _, _, _ = GetInboxHeaderInfo(index);
 		if not wasRead then
