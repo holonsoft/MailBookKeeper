@@ -1,14 +1,14 @@
-## Interface: 90001
+## Interface: 90002
 ## X-Min-Interface: 90001
 ## Title: Mail BookKeeper
-## Version: 1.2.5.release
+## Version: 1.2.6.release
 ## Notes: Tracks incoming and outgoing mails, trades 
 ## Author: polarkreis@web.de
 ## SavedVariables: MailBookKeeperHistory, MailBookKeeperOptions
 ## SavedVariablesPerCharacter: MailBookKeeperHistoryPerChar
 ## OptionalDeps: LibStub, Ace3, lib-st
 ## X-fork: fork of original addon 'Mail Outbox', thanks for great work  to DieenDieen
-## X-Curse-Packaged-Version: 1.2.5.release
+## X-Curse-Packaged-Version: 1.2.6.release
 ## X-Curse-Project-Name: Mail BookKeeper
 ## X-Curse-Project-ID: mbk
 
