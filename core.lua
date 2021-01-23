@@ -348,7 +348,7 @@ local function ProcessInboxMail(index)
 	
 	Transaction.Items = {};
 	for i=1,itemCount do		
-		local Name, itemTexture, Count, quality, canUse = GetInboxItem(index, i);
+        local Name, itemId, itemTexture, Count, quality, canUse = GetInboxItem(index, i);
 		if Name then
 			local NewItem= {};
 			NewItem.Name=Name;
