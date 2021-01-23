@@ -496,6 +496,7 @@ local mailhistorycols = {
      end;
 
 	-- cvt
+	--[[
 	  tinsert(testdata, {cols = {
 		{value = ""},
 		{value = ""},
@@ -508,7 +509,7 @@ local mailhistorycols = {
 		{value = ""},
 		{value = ""}
 		}});
-
+	]]
 	   mailhistoryST:SetData(testdata);
 
 local STFilter=function (self, row)
