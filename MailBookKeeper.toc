@@ -8,7 +8,7 @@
 ## SavedVariablesPerCharacter: MailBookKeeperHistoryPerChar
 ## OptionalDeps: LibStub, Ace3, lib-st
 ## X-fork: fork of original addon 'Mail Outbox', thanks for great work  to DieenDieen
-## X-Curse-Packaged-Version: 1.2.6.release
+## X-Curse-Packaged-Version: 1.2.7.release
 ## X-Curse-Project-Name: Mail BookKeeper
 ## X-Curse-Project-ID: mbk
 
