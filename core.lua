@@ -306,7 +306,7 @@ end;
 
 local function FormatMoneyTostring(ammount,category)
    local outstring="";
-   ammount = ammount or 0;
+   ammount = tonumber(ammount) or 0;
    if (ammount>=0) or (mooptions[category].Zero) then
       if mooptions[category].Graphics then
          outstring=GetCoinTextureString (ammount+0.0001);
@@ -348,7 +348,7 @@ local function ProcessInboxMail(index)
 	
 	Transaction.Items = {};
 	for i=1,itemCount do		
-		local Name, itemTexture, Count, quality, canUse = GetInboxItem(index, i);
+        local Name, itemId, itemTexture, Count, quality, canUse = GetInboxItem(index, i);
 		if Name then
 			local NewItem= {};
 			NewItem.Name=Name;
@@ -496,6 +496,7 @@ local mailhistorycols = {
      end;
 
 	-- cvt
+	--[[
 	  tinsert(testdata, {cols = {
 		{value = ""},
 		{value = ""},
@@ -508,7 +509,7 @@ local mailhistorycols = {
 		{value = ""},
 		{value = ""}
 		}});
-
+	]]
 	   mailhistoryST:SetData(testdata);
 
 local STFilter=function (self, row)
@@ -650,7 +651,7 @@ end;
 local function UpdateSendMailitemsInfo()
    outgoingmailitems = {};
    for index=1, 12 do 
-		local Name, Texture, Count, Quality = GetSendMailItem (index); 
+		local Name, itemId, Texture, Count, Quality = GetSendMailItem (index);
 		if Name then    
 			local ItemAlreadyInList = false;	
 		    for inindex=1,#outgoingmailitems do
