@@ -306,7 +306,7 @@ end;
 
 local function FormatMoneyTostring(ammount,category)
    local outstring="";
-   ammount = ammount or 0;
+   ammount = tonumber(ammount) or 0;
    if (ammount>=0) or (mooptions[category].Zero) then
       if mooptions[category].Graphics then
          outstring=GetCoinTextureString (ammount+0.0001);
@@ -650,7 +650,7 @@ end;
 local function UpdateSendMailitemsInfo()
    outgoingmailitems = {};
    for index=1, 12 do 
-		local Name, Texture, Count, Quality = GetSendMailItem (index); 
+		local Name, itemId, Texture, Count, Quality = GetSendMailItem (index);
 		if Name then    
 			local ItemAlreadyInList = false;	
 		    for inindex=1,#outgoingmailitems do
