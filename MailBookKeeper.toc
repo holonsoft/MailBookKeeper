@@ -1,7 +1,7 @@
 ## Interface: 90002
 ## X-Min-Interface: 90001
 ## Title: Mail BookKeeper
-## Version: 1.2.6.release
+## Version: 1.2.7.release
 ## Notes: Tracks incoming and outgoing mails, trades 
 ## Author: polarkreis@web.de
 ## SavedVariables: MailBookKeeperHistory, MailBookKeeperOptions
