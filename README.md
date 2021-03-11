@@ -41,6 +41,8 @@ Summary costs
 assign char to bnet tag
 
 
-For classic:
+Roadmap for classic:
 Add a timer for 60 min mail waiting
+
+Attention: There's no concrete timetable for realizing this feature
 
