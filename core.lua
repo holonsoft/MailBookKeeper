@@ -156,6 +156,9 @@ modefaultoptions = {
 	["History"] = {
 		["Enabled"] = true,
 	},
+	["Delete"] = {
+		["Enabled"] = true,
+	},
 	["Cash"] = {
 		["Enabled"] = true,
 	},	
@@ -401,21 +404,111 @@ function MyGetInboxText(...)
    return OldGetInboxText(...);
 end;
 
+
+local function CleanupHistoryTable(days)
+	print(string.format("MailBookKeeper: Deleting all mails older than %d %s", days, " days in history"))
+
+	local currentTimeStamp = C_DateAndTime.GetCurrentCalendarTime()
+	print(string.format("Current date: %4d-%02d-%02d", currentTimeStamp.year, currentTimeStamp.month, currentTimeStamp.monthDay))
+
+	local tresholdTimeStamp = C_DateAndTime.AdjustTimeByDays(currentTimeStamp, -days -1)
+	print(string.format("Deleting older than: %4d-%02d-%02d", tresholdTimeStamp.year, tresholdTimeStamp.month, tresholdTimeStamp.monthDay))
+
+	local maxIndex = 0
+
+	for index, value in pairs(MailBookKeeperHistory) do 
+		maxIndex = maxIndex + 1;
+
+		local timestamp = string.sub(value.Timestamp, 1, 10)
+		local year, month, day = timestamp:match("(%d+)/(%d+)/(%d+)")
+		
+		local calendarTimeObject =  {
+			hour = 0,
+			minute = 0,
+			month = tonumber(month),
+			monthDay = tonumber(day),
+			weekday = 1,
+			year = tonumber(year)
+		}
+
+		local isLower = C_DateAndTime.CompareCalendarTime(calendarTimeObject, tresholdTimeStamp)
+
+		if (isLower == -1) then 
+			print(string.format("deleting until date: %4d-%02d-%02d", calendarTimeObject.year, calendarTimeObject.month, calendarTimeObject.monthDay))	
+			print(string.format("Index count is %d", maxIndex))	
+			break
+		end
+	end
+
+	for i=1, maxIndex  do
+		table.remove(MailBookKeeperHistory, 1)
+	end
+
+	print(string.format("MailBookKeeper: Deleted!"))
+end
+
+
+local function DeleteHistory()
+	local frame = AceGUI:Create("Frame")
+
+	frame:SetCallback("OnClose",function(widget)
+		frame:Hide();
+		frame:ClearAllPoints();
+		AceGUI:Release(frame);
+		end)
+	
+		frame:SetTitle("MailBookKeeper DELETE history page");
+		frame:SetStatusText("Deletion is permanent and can not be reverted!!!")
+		frame:SetLayout("Flow")
+		frame:SetPoint("CENTER", -200, -250);
+		frame:SetWidth(500);
+		frame:SetHeight(200);
+
+		local labelMsg = AceGUI:Create("Label")
+		labelMsg:SetText("Waiting for input ...")
+
+		local labelHint = AceGUI:Create("Label")
+		labelHint:SetText("After deletion you have to relog!!! Tables are only stored due logout of a char!")
+
+		local editbox = AceGUI:Create("EditBox")
+		editbox:SetLabel("Enter days mails to be preserved: ")
+		editbox:SetWidth(300)
+		editbox:SetFocus()
+		editbox:SetMaxLetters(4)
+		editbox:SetCallback("OnEnterPressed", function(widget, event, text)
+			local days = tonumber(text)		
+			if days then
+				labelMsg:SetText(string.format("Deleting all mails older than %d %s", days, " days in history"))
+				CleanupHistoryTable(days)
+			else
+				labelMsg:SetText("Not a number, please enter ciphers only!")
+			end
+		end)
+		
+		frame:AddChild(editbox)
+		frame:AddChild(labelMsg)
+		frame:AddChild(labelHint)
+
+end;
+
+
+
 local function ShowHistory()
--- Create a container frame
-local f = AceGUI:Create("Frame")
 
-f:SetCallback("OnClose",function(widget)
-local f=widget.ScrollTable.frame;
-f:Hide();
-widget.ScrollTable:SetData({});
-f:UnregisterAllEvents();
-f:ClearAllPoints();
-widget.ScrollTable = nil;
-AceGUI:Release(widget) 
-end)
+	--table.sort(MailBookKeeperHistory, function (a, b) return a.Timestamp < b.Timestamp end)
 
+	-- Create a container frame
+	local f = AceGUI:Create("Frame")
+		f:SetCallback("OnClose",function(widget)
+		local f=widget.ScrollTable.frame;
+		f:Hide();
+		widget.ScrollTable:SetData({});
 
+		f:UnregisterAllEvents();
+		f:ClearAllPoints();
+		widget.ScrollTable = nil;
+		AceGUI:Release(widget) 
+	end)
 
 
 f:SetTitle("MailBookKeeper history page");
@@ -459,6 +552,7 @@ local mailhistorycols = {
 		mailhistoryST.frame:SetPoint("TOP", window, 0, -60)
 		mailhistoryST.frame:SetPoint("RIGHT", window, -10,0)	
 
+	
 
 	-- mailhistoryST.frame:RegisterEvent("OnEnter", 
 		-- function (rowframe, cellframe, data, cols, row, realrow, column, scrollingtable, ...)
@@ -472,8 +566,11 @@ local mailhistorycols = {
 	mailhistoryST.Fire=function(...)return true;end;
 	mailhistoryST.userdata={};
 	
+	--fixit: sort table descending
+
 	mailhistoryST.QuickFilterRule="";
 	
+
 	if MailBookKeeperHistoryAvaiable then 
 	local testdata={};
 	local i=0;
@@ -1171,16 +1268,24 @@ end
 
 
 
+
+
 ----------------------------------------------
 function core:MySlashProcessorFunc(input)	--
 ----------------------------------------------
     if input=="" then
       print ("--- Mail Bookkeeper "..version.." is running");
-      print ("to check mail history use /MailBookKeeper history  (or mbk /history)");
+      print ("to check mail history use /MailBookKeeper history  (or /mbk history)");
+	  print ("to delete mail history use /MailBookKeeper delete (or /mbk delete). Shows a frame within further inputs.");
+	  print ("Deletion is permanent and cannot be reverted!!!");
       print ("for csv export use /MailBookKeeper exportcsv");
    end;
    if strlower(input)=="history" then
      ShowHistory();
+   elseif strlower(input)=="show" then
+	ShowHistory();
+   elseif strlower(input)=="delete" then
+	  DeleteHistory();
    elseif strlower(input)=="exportcsv" then
      ExportCSV();
    elseif strlower(input)=="moneyprogress" then

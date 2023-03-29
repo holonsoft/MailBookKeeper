@@ -1,13 +1,25 @@
 Addon links sent mail info into chat frame (with item summary, subject, etc..) and keeps history which you can show by 
 
 /mailbookkeeper  history
+/mailbookkeeper  show
 
 command
+
+With 
+
+/mailbookkeeper  delete
+
+you can cleanup your history
+
+To shorten command you can use
+
+/mbk <cmd>
+
 
 It tracks all incoming and outgoing mails for an account. You can see what every of your characters got (gold, items) or has sent to someone else (or another char of yours).
 It's a fork of "Mail Outbox" addon which is not updated anymore since several years. So I decided to fork it, repair LUA problems and get a base for further development of this addon.
 
-At the moment World of Warcraft Version 9.0.5 is supported. Because I do'nt like to play classic, it is not tested at all for it.
+At the moment World of Warcraft Version 10.0 is supported. Because I do'nt like to play classic, it is not tested at all for it.
 
 
 Extra notes:
